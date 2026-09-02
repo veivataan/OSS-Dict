@@ -77,7 +77,6 @@ jobs:
         run: | 
           echo "CURRENT_VERSION_CODE=$(bundle exec fastlane run android_get_version_code gradle_file:build.gradle | grep -oP '(?<=Result:)\s*\K(\d+\.?)+' )" > $GITHUB_ENV
 
-
       - id: release_type_string
         uses: ASzc/change-string-case-action@v6
         with:
@@ -109,6 +108,7 @@ jobs:
         run: |
           echo "VERSION_STR=${{env.NEW_VERSION}}.${{env.NEW_VERSION_CODE}}"  >> $GITHUB_ENV
 
+
       - name: Bump version
         uses: Swisyn/android-version-generator-actions@v1.5
         if: github.event.inputs.release_type != 'none'
@@ -122,6 +122,11 @@ jobs:
         run: |
           sh scripts/ci.prepare.sh --platform android --flavor "${{ github.event.inputs.flavor }}" --version "${{ env.VERSION_STR }}"
 
+      
+      - name: Build Release APK
+        run: |
+              ./gradlew assembleRelease
+      
       - uses: actions/upload-artifact@v4
         with:
           name:  ${{ env.APP_ID }}.${{ env.VERSION_STR }}
