@@ -33,11 +33,6 @@ jobs:
           filter: tree:0
           submodules: recursive
 
-
-      - name: Git config
-        run: |
-          git config pull.rebase false
-
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.3' # Not needed with a `.ruby-version` or `.tool-versions`
