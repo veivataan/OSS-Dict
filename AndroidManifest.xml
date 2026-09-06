@@ -59,7 +59,7 @@
         <activity
             android:name=".article.ArticleCollectionActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout"
-            android:excludeFromRecents="true"
+            android:excludeFromRecents="false"
             android:taskAffinity=""
             android:exported="true">
             <intent-filter>
